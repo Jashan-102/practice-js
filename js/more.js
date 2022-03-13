@@ -211,6 +211,7 @@ console.log("short syntax for declaring methods");
 const user8 = {
   firstName: "user8",
   lastName: "Singh",
+  age: 20,
   about() {
     console.log(
       `Hii ${this.firstName}, I am short syntax for declaring methods.`
@@ -218,3 +219,282 @@ const user8 = {
   },
 };
 user8.about();
+
+console.log(
+  "functions create multi objects:\nAnother way to create empty object:"
+);
+
+const obj1 = {
+  key1: "value1",
+  key2: "value2",
+  age: 20,
+  about() {
+    console.log(`I belongs to obj1`);
+  },
+};
+
+let obj2 = Object.create(obj1);
+console.log(obj2);
+console.log(
+  "As we want to access a 'key' but not present in obj2 So, we want JS to check it in another object i.e in obj1\nTo do so we need to create object with:\nObject.create(object reference)\nBecause of this JS is now able to check an 'key' in obj1 & obj2.\nFirstly JS check the 'key' in obj2. If not found there then check into obj2\nThis happen bcz of prototype/proto only. As now obj1 is present in obj2 proto. Which you can see in the browser console when you print your whole object\nNote: Prototyping and prototype/proto are two d/f concepts.\nTwo ways of mentioning proto:\n__proto__ and [[prototype]]\nYou can also check proto of object by doing:"
+);
+console.log(obj2.__proto__);
+console.log("Proto creates a chain/reference");
+console.log(
+  "Mainly use of Proto:\nAs we create a method & whenever we call that obj having method "
+);
+console.log(
+  "Prototype:\nJS function -> function + Object\nWhen we create a function -> function give us a empty-object. That object called as Prototype.\nPrototype is an empty object of function in which we can add key value pair related"
+);
+function hello() {
+  console.log("Hello");
+}
+console.log(hello.name);
+console.log(hello.prototype);
+console.log(
+  "Only function provide prototype property.\nPrototype is used to add/remove values i.e, key value pair related to function."
+);
+
+// key value pair added
+hello.prototype.abc = "abc";
+console.log(hello.prototype);
+
+const userMethods = {
+  about() {
+    return `FirstName: ${this.firstName} LastName: ${this.lastName}`;
+  },
+  is18() {
+    return this.age >= 18;
+  },
+  sing() {
+    return `la la la la laaa`;
+  },
+};
+
+// constructor function
+function CreateUser(firstName, lastName, age) {
+  const user = Object.create(userMethods);
+  user.firstName = firstName;
+  user.lastName = lastName;
+  user.age = age;
+  return user;
+}
+
+const user11 = CreateUser("Jashandeep", "Kaur", 21);
+
+console.log(user11);
+console.log(user11.about());
+console.log(user11.is18());
+console.log(user11.sing());
+
+console.log(
+  "New Keyword:\nNew keyword is use to call the constructor function,\nBy using new Keyword we get:\n1. empty object\n2. return this (this={})Automatically create relation which we manually do by: Object.create(userMethods);"
+);
+// constructor created
+function CreateUser2(firstName, lastName, age) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.age = age;
+}
+
+// added into prototype
+CreateUser2.prototype.about = function () {
+  console.log(this.firstName, this.lastName, this.age);
+};
+
+CreateUser2.prototype.is18 = function () {
+  return this.age >= 18;
+};
+
+CreateUser2.prototype.sing = function () {
+  return `la la la la laaa`;
+};
+
+// object created
+const user12 = new CreateUser2("firstName", "lastName", 23);
+
+console.log(user12);
+user12.about();
+
+console.log(
+  "Their is a convention: If their is a function that going to be called by using new Keyword that function name should have first word Capital.\neg: We have made an JS library then how will the users know that we have to use new keyword with this function thats why this convention is used."
+);
+
+console.log(
+  "hasOwnProperty:\nIf we using key:value having proto and prototype by using Loop. It will return its property & proto and prototype values as key too.\nSo, if you want to print only object's ownProperty then we use hasOwnProperty(key)."
+);
+
+console.log("All values including proto & prototype:");
+for (const userEle in user12) {
+  console.log(userEle);
+}
+console.log("Objects OwnProperties:");
+for (const userEle in user12) {
+  if (user12.hasOwnProperty(userEle)) {
+    console.log(userEle);
+  }
+}
+
+console.log("More about Prototype:\n");
+let num1 = ["1", "2", "3", "4", "5"];
+console.log(
+  'Internally JS consider this array:\nlet num1 = ["1", "2", "3", "4", "5"];\nAs:\nlet num = new Array(1,2,3,4,5);\nIt uses Array Constructor.'
+);
+console.log(
+  "As in this array you can use any of array methods. But from where these methods come from???\nThese methods are stored in Array Prototype i.e, JS Array Constructor."
+);
+console.log(num1.filter);
+console.log(
+  "You will get list of array methods in Array form bez who created JS has stored these methods inside an empty Array. Firstly empty array created then push all the methods in it. Thats why It always seen as inside array instead of object."
+);
+console.log(Array.prototype);
+console.log(
+  "class Keywords:\nIt will help us to do work actually we do like:\nAlways call class by using 'new' keyword.\n"
+);
+
+class CreateUser4 {
+  // Constructor function create object for us
+  constructor(firstName, lastName, age, email, address) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+    this.email = email;
+    this.address = address;
+    // No need to mention return here as Constructor by default return Object
+  }
+  about() {
+    console.log(this.firstName, this.lastName, this.age);
+  }
+  is18() {
+    return this.age >= 18;
+  }
+  sing() {
+    return `la la la la laaa`;
+  }
+  print(a) {
+    console.log(a);
+  }
+}
+const user14 = new CreateUser4(
+  "Jashandeep",
+  "Kaur",
+  21,
+  "jashan@gmail.com",
+  "Punjab"
+);
+
+console.log(user14);
+
+console.log(
+  "Firstly constructor execute & it will create an object user14\nthen about & other methods automatically added in prototype.\nTo create object we need to call constructor -> To call constructor you always need to call it by using 'new' keyword"
+);
+
+console.log(user14.sing());
+user14.print("Hiii, I am Parameter into Prototype.");
+console.log("Other way to see Prototype:");
+console.log(Object.getPrototypeOf(user14));
+console.log("extend Keyword:\n");
+
+class Animal {
+  // Constructor function create object for us
+  constructor(firstName, age) {
+    this.firstName = firstName;
+    this.age = age;
+    // No need to mention return here as Constructor by default return Object
+  }
+  eat() {
+    return `${this.name} is eating `;
+  }
+  isCute() {
+    return "Yes";
+  }
+  isSuperCute() {
+    return this.age <= 2;
+  }
+}
+
+const user15 = new Animal("rabbit", 1);
+console.log(user15);
+console.log(user15.isCute());
+console.log(
+  "Now we want a class having same property and methods.\nIn this case 'extends' keyword help us."
+);
+
+class Dog extends Animal {}
+const user16 = new Dog("rabbit", 2);
+console.log(user16);
+console.log(user16.isSuperCute());
+
+console.log(
+  "Animal is called as Base class\nDog is called as sub-class/Derived class of Animal class.\nFirstly look for values in Dog, if not found then go to Animal class for constructor and methods\nAnimal class's all property is extended inside Dog class and Dog class now have all the property Animal has and we can use Animal constructor and method inside Dog class."
+);
+
+console.log("super Keyword:\nsuper keyword refers to our parent/base class:");
+
+class Cat extends Animal {
+  constructor(firstName, age, speed) {
+    console.log(
+      "here in super keyword by passing params. We say:-\nthese name/age parameter belongs to its base/parent class.Means we telling use this from their parents"
+    );
+    super(firstName, age);
+    this.speed = speed;
+  }
+  run() {
+    return `${this.firstName} cat run by speed of ${this.speed}km/h`;
+  }
+}
+
+const CatUser = new Cat("Meow", 1, 22);
+console.log(CatUser);
+console.log(CatUser.run());
+
+console.log(
+  "Note:\nIf you are creating same method in Base class, then Base class's method will consider first. As JS firstly find properties base class and If not found in Base class then move to Parent class in search of property."
+);
+console.log("getter & setter:");
+console.log(
+  "getter let us use a method same as properties.Like(person.fullName)"
+);
+console.log("setter is use to set property. It always requires an parameter");
+
+class Person {
+  constructor(firstName, lastName, fullName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.fullName = fullName;
+  }
+  funFullName() {
+    return `FullName: ${this.firstName} ${this.lastName}`;
+  }
+
+  get getFullName() {
+    return `GetFullName: ${this.firstName} ${this.lastName}`;
+  }
+
+  set SetFullName(fullName) {
+    this.fullName = "Jashndeep Kaur Mehton";
+    const [fname, lname, surname] = this.fullName.split(" ");
+    this.fname = fname;
+    this.lname = lname;
+    this.surname = surname;
+    return `${this.fname}`;
+  }
+}
+const person3 = new Person("Jashandeep", "Kaur");
+console.log(person3.funFullName());
+console.log(person3.getFullName);
+console.log(person3.SetFullName);
+
+console.log(
+  "static methods and properties:\nstatic methods and properties are those which we define in our class by using 'static' keyword. You can't use static methods and properties with object As they only belong to class not to its object. You can access static methods and properties by using className."
+);
+
+class StaticExample {
+  static info() {
+    return `Hii, I am static method`;
+  }
+  static description = "Static Property";
+}
+
+console.log(StaticExample.info());
+console.log(StaticExample.description);

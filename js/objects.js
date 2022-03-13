@@ -1,6 +1,7 @@
 console.log("Learning about Objects in JS:");
 console.log("Objects store data in 'key : value' Pairs");
 console.log("Objects don't have index");
+console.log("Object can also be called as instance.");
 console.log(
   "Creating objects way also know as Object Literals i.e by using {}-currly braces"
 );
@@ -120,7 +121,7 @@ console.log(user2.userName);
 // Take out an particular value of any user
 const [
   // extracting 2 props from an object
-  { userName: user1Name , userId },
+  { userName: user1Name, userId },
   { userName: user2Name },
   ,
   { gender: user3Gender },
