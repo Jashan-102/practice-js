@@ -186,3 +186,95 @@ toDoList.insertAdjacentElement("afterend", myTodo2); // after
 console.log(
   "Clone Nodes:\nYou want to use both append and prepend. Todo so we have to clone the Node"
 );
+
+const li = document.querySelector("li");
+console.log(li);
+li.textContent = "New Added by Clone Nodes";
+console.log(
+  "li.cloneNode() will clone li into li2. And this true lead to do deep cloning also: clone with their children"
+);
+const li2 = li.cloneNode(true);
+toDoList.append(li);
+toDoList.prepend(li2);
+
+console.log(
+  "static list and live list:\nNodeList querySelectorAll belongs to static list\nHTML Collection getElementById belong to live list"
+);
+
+console.log(
+  "get dimension of an element:\ngetBoundingClientRect() will return us all the object of element with their width, height and other properties.\nIt also provide top/bottom and onScroll their values change and go into negative"
+);
+console.log(toDoList.getBoundingClientRect());
+console.log("To get specific property");
+console.log(toDoList.getBoundingClientRect().top);
+
+console.log(
+  'events:\nOn action perform a Task.\nWays to use events:\n1. <button onClick="Task">Click ME!</button>'
+);
+
+const btn = document.getElementsByTagName("button");
+console.log("2.Add EventListener Method:", btn);
+// btn.addEventListener("event", function doSomething() {
+//   // to something
+// });
+
+console.log(
+  "This keyword inside event listener callback function:\nThis value will be the selected element. i.e, btn in this case.\nIn case of arrow function It will be window object as in arrow function, for this it always look a step up for this value. So, it will not consider btn but one step up i.e, window object"
+);
+
+console.log(
+  "event on Multiple elements:\nYou can do so, by using loops:\nfor of loop\nfor loop\nforEach loop.\nSelect all the elements then apply loop to it."
+);
+
+const allH1 = document.querySelectorAll("h1");
+console.log(allH1);
+allH1.forEach((value) => {
+  console.log(value.innerHTML);
+});
+
+console.log(
+  "event Object:\nJS Engine execute code line by line\nJS Engine also have some extra features + WebAPIs\nWhenever a event perform browser do 2 things:\n1. give callback function to JS Engine for execution.\n2. With callback function it also give performed event info in the form of object. We can access this event object by passing it as an argument in function. You can keep any name for this event object i.e, e, event, abc."
+);
+
+console.log(
+  "Now, as its hard to use arrow function in EventListener bcz that lead to problem with this keyword. So, we can use event object with arrow functions. Which provide us set of objects having info related to that event"
+);
+
+console.log(
+  "events behind the scenes:\nTheir is a:\nJS Engine and inside it callback\nWeb API\nEvent Loop\nCallback Queue"
+);
+console.log(
+  "JS Engine: Lead to execution of JS code as it has Callstack / GEC inside it"
+);
+
+console.log(
+  "Web API: These are browser APIs which lead to help browser to complete the tasks which going to be hard while executing JS"
+);
+
+console.log(
+  "Callback Queue: It is a Queue where EventListener's callback functions waits to perform events"
+);
+
+console.log(
+  "Event Loop: It lead to take care about send callback function present in callback Queue to the CallStack for execution. It look for when CallStack is free, so, it can send Callback Queue's Callback to the CallStack."
+);
+
+console.log(
+  "eg: We are using onClick event, So, browser will keep his eyes on button clicks. So, that  it can run its callback function."
+);
+
+// btn.addEventListener("click", (e) => console.log(e));
+
+console.log(
+  "When JS engine look something like this (i.e, eventListener) then, It assign this to browser and browser Web APIs keep his eyes on task. So, that JS engine will not stuck their by keep eyes on event perform. It continue its execution.\nEvent Loop will look for empty callStack and then assign callback function to CallStack for execution"
+);
+
+console.log(
+  "Keypress / mouse events:\nTheir are many events you can use:\nkeypress:"
+);
+
+// body.addEventListener("keypress", function(e){
+//   console.log(e)
+// })
+
+console.log("Event bubbling OR event propagation:\n");

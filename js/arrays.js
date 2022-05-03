@@ -283,3 +283,24 @@ const array3 = [55, 292, 88];
 const array4 = [67, 89, 89];
 const mynewarr = [...array1, ...array2, ...array3, ...array4];
 console.log(mynewarr);
+
+console.log(
+  "Maths.random()\nIt will give us random number in between 0-9, but will not give 1."
+);
+
+console.log(Math.random());
+console.log(Math.random());
+
+console.log("To get 1:");
+console.log(Math.random() * 10);
+console.log(Math.random() * 10);
+console.log(Math.random() * 10);
+
+console.log("Only want integer not float:");
+console.log(Math.floor(Math.random() * 10));
+console.log(Math.floor(Math.random() * 10));
+console.log(Math.floor(Math.random() * 10));
+
+console.log("Required in between of specified numbers");
+console.log(Math.floor(Math.random() * 50));
+console.log(Math.floor(Math.random() * 3));
