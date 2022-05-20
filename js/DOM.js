@@ -278,3 +278,26 @@ console.log(
 // })
 
 console.log("Event bubbling OR event propagation:\n");
+console.log(
+  "Event bubbling is when you have clicked on event , then its parent's callback will also called, then its parent callback will be called.\nits parent callback will be called means its ancestors called.\nTo stop bubbling you can use:\nevent.stopPropagation()"
+);
+
+console.log(
+  "Event Capturing:\nIn this addEventListener took three values:\nbtn.addEventListener('click', callback, true)\nThis true boolean value defined for declaring is we want to capture the event OR not.\nCapturing first goes through ancestors chain down."
+);
+
+console.log(
+  "Capturing and bubbling:\nYou can consider them an event processing phases.\n1. Capturing Phase: event goes down to the element\n2. Targets Phase: event reach to the element\n3. Bubbles Phase: event bubbles up from the element"
+);
+console.log("img");
+console.log(
+  "The event first goes through ancestors chain down to the element i.e, Capturing Phase\nThen it reach to the target and triggers there i.e, Targets Phase\nThen it goes up (i.e, Bubbling Phase) calling handlers on its way.\nIt work like:\nCapturing --- Bubbling"
+);
+
+console.log(
+  "Event Delegation:\nCapturing and bubbling allow us to implement one of the most powerful event handling patter called event delegation.\nIf you want a lot of elements handle in similar ways, then instead assigning a handler to each of them. We put a single handler for each element on their common ancestor."
+);
+
+console.log(
+  "eg: We have added handlers to ancestor i.e, grandparent but it also work with when we click on child element. This is called event delegation\nIt happen because on click bubbling goes upwards to check and call parent's callback."
+);

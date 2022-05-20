@@ -1,17 +1,15 @@
-const body = document.querySelector("#bgColorBody");
-console.log(body);
+const bgcolor = document.querySelector("#bgChange");
+console.log(bgcolor);
+function ChangeColor1() {
+  debugger;
+  const red = Math.floor(Math.random() * 256);
+  const green = Math.floor(Math.random() * 256);
+  const blue = Math.floor(Math.random() * 256);
+  const randomColor = `rgba(${red}, ${green}, ${blue})`;
+  return randomColor;
+}
 
-const red = Math.floor(Math.random() * 256);
-const green = Math.floor(Math.random() * 256);
-const blue = Math.floor(Math.random() * 256);
-
-// body.style.backgroundColor = `rgba(${red}, ${green}, ${blue})`;
-
-// const changeColorBtn = document.querySelector("#changeColorBtn");
-
-// function ChangeColor1() {
-// }
-
-setInterval(() => {
-  body.style.backgroundColor = `rgba(${red}, ${green}, ${blue})`;
-}, 100);
+bgcolor.addEventListener("click", () => {
+  const getRandomColor = ChangeColor1();
+  document.body.style.backgroundColor = getRandomColor;
+});
