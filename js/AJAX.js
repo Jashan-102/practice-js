@@ -150,6 +150,7 @@ sendRequest("GET", URL)
     return sendRequest("GET", url);
   })
   .then((newResponse) => {
+    0;
     const newData = JSON.parse(newResponse);
     console.log(newData);
   })
@@ -158,3 +159,108 @@ sendRequest("GET", URL)
   });
 
 console.log("Fetch API:");
+console.log(
+  "1. It is a JS function.\n2. It always returns a Promise means .then() works with this.\n3. By default fetch API create GET request."
+);
+
+fetch(URL)
+  .then((response) => {
+    console.log("aa", response);
+    return response.json();
+  })
+  .then((data) => {
+    console.log("Fetch Data", data);
+  })
+  .catch((err) => {
+    console.log("Fetch API: Network Error");
+  });
+
+console.log(
+  "The catch block execute when Promise rejected. Fetch function only reject when their is Network Error means when their is no Internet. Only then catch block runs."
+);
+
+console.log(
+  "Question arise: How can we check their is an Error in fetch API response. In response object you will got a key named 'OK'.\nIf its value is 'false' means failed. If 'true' means success."
+);
+
+fetch(URL)
+  .then((response) => {
+    console.log("aa", response);
+    if (response.ok) {
+      return response.json();
+    } else {
+      console.log("Error in response");
+    }
+  })
+  .then((data) => {
+    console.log("Fetch Data", data);
+  })
+  .catch((err) => {
+    console.log("Fetch API: Network Error");
+  });
+
+console.log(
+  "By default fetch do GET API request. when we want to us other request. When we want to use other request."
+);
+
+console.log(
+  "body: JSON.stringify({}): As we always get data in JSON format.\nSo, need to send data also in JSON format. Thats why we declare this method. ANd inside this we define which data will be used."
+);
+
+console.log("headers: {}: It is most important. charset is optional.");
+
+fetch("https://jsonplaceholder.typicode.com/posts", {
+  method: "POST",
+  body: JSON.stringify({
+    title: "foo",
+    body: "bar",
+    userId: 1,
+  }),
+  headers: {
+    "Content-type": "application/json; charset=UTF-8",
+  },
+})
+  .then((response) => {
+    console.log("POST", response);
+    if (response.ok) {
+      return response.json();
+    } else {
+      console.log("Error in response");
+    }
+  })
+  .then((data) => {
+    console.log("Fetch Data", data);
+  })
+  .catch((err) => {
+    console.log("Fetch API: Network Error");
+  });
+
+console.log(
+  "async await:\nIt is a way of consuming Promise. async await is a optimized way of using .then()/Promise.\nBehind the scenes async await also uses .then()/Promise keywords."
+);
+
+console.log(
+  "async: This make a normal function to Promise and that function will always return a Promise.This function will work asynchronously means by browser."
+);
+
+console.log(
+  "await: This is like .then() after resolve. This will wait for Promise to be resolved or reject. As prior we use .then()/.catch(). Here we use await."
+);
+
+async function getPost(URL) {
+  const response = await fetch(URL);
+  const data = await response.json();
+  return data;
+}
+
+getPost(URL)
+  .then((data) => {
+    console.log("async await", data);
+  })
+  .catch((error) => {
+    console.log("Network Erro-r");
+  });
+
+console.log("async await with arrow function:");
+const myfunc = async () => {};
+
